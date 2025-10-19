@@ -1,0 +1,96 @@
+{
+  "garments": [
+    {
+      "id": "vestido_siracusa",
+      "name": "Vestido Siracusa Burdeos",
+      "path": "garments/vestido_siracusa_burdeos.png",
+      "type": "dress",
+      "metadata": {
+        "base_shoulder_px": 250,
+        "base_torso_px": 500,
+        "y_offset_to_waist_px": 0
+      },
+      "tps_control_points": {
+        "src": [
+          {
+            "name": "L_shoulder_seam",
+            "x": 200,
+            "y": 125
+          },
+          {
+            "name": "R_shoulder_seam",
+            "x": 800,
+            "y": 125
+          },
+          {
+            "name": "L_waist",
+            "x": 250,
+            "y": 437
+          },
+          {
+            "name": "R_waist",
+            "x": 750,
+            "y": 437
+          },
+          {
+            "name": "L_hip",
+            "x": 300,
+            "y": 687
+          },
+          {
+            "name": "R_hip",
+            "x": 700,
+            "y": 687
+          }
+        ],
+        "description": "Lady Pipa elegant dress - Control points for TPS warping"
+      }
+    },
+    {
+      "id": "vestido_nubia",
+      "name": "Vestido Nubia Marino",
+      "path": "garments/vestido_nubia_marino.png",
+      "type": "dress",
+      "metadata": {
+        "base_shoulder_px": 240,
+        "base_torso_px": 520,
+        "y_offset_to_waist_px": -10
+      },
+      "tps_control_points": {
+        "src": [
+          {
+            "name": "L_shoulder_seam",
+            "x": 200,
+            "y": 149
+          },
+          {
+            "name": "R_shoulder_seam",
+            "x": 800,
+            "y": 149
+          },
+          {
+            "name": "L_waist",
+            "x": 250,
+            "y": 524
+          },
+          {
+            "name": "R_waist",
+            "x": 750,
+            "y": 524
+          },
+          {
+            "name": "L_hip",
+            "x": 300,
+            "y": 824
+          },
+          {
+            "name": "R_hip",
+            "x": 700,
+            "y": 824
+          }
+        ],
+        "description": "Lady Pipa elegant dress - Control points for TPS warping"
+      }
+    }
+  ]
+}
