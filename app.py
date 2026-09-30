@@ -293,12 +293,23 @@ class ProcessingState:
         """Apply temporal smoothing to landmarks."""
         smoothed = {}
         
-        for key, (x, y) in landmarks.items():
+        # Define metadata keys that should not be smoothed
+        metadata_keys = {'confidence', 'is_cached', 'image_size'}
+        
+        for key, value in landmarks.items():
+            # Skip metadata fields (confidence, is_cached, image_size)
+            if key in metadata_keys:
+                smoothed[key] = value
+                continue
+            
+            # Unpack coordinate tuple
+            x, y = value
+            
             filter_x = self.get_or_create_filter(f"{key}_x")
             filter_y = self.get_or_create_filter(f"{key}_y")
             
-            smooth_x = filter_x(x, self.timestamp)
-            smooth_y = filter_y(y, self.timestamp)
+            smooth_x = filter_x.filter_scalar(x, self.timestamp)
+            smooth_y = filter_y.filter_scalar(y, self.timestamp)
             
             smoothed[key] = (smooth_x, smooth_y)
         
