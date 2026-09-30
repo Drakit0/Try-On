@@ -10,7 +10,8 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "Virtual Try-On Team"}
+    {name = "Pablo Tuñón Laguna"},
+    {name = "Lydia Ruiz Martínez"}
 ]
 keywords = ["streamlit", "mediapipe", "computer-vision", "try-on", "tps"]
 classifiers = [
@@ -50,10 +51,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/virtual-tryon-py"
-Documentation = "https://github.com/yourusername/virtual-tryon-py/blob/main/README.md"
-Repository = "https://github.com/yourusername/virtual-tryon-py"
-Issues = "https://github.com/yourusername/virtual-tryon-py/issues"
+Homepage = "https://github.com/Drakit0/Try-On"
+Documentation = "https://github.com/Drakit0/Try-On/blob/main/README.md"
+Repository = "https://github.com/Drakit0/Try-On"
+Issues = "https://github.com/Drakit0/Try-On/issues"
 
 [tool.black]
 line-length = 100

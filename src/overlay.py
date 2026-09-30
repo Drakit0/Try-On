@@ -27,7 +27,7 @@ Workflow
 4. Compose warped garment onto frame with alpha blending
 5. Optionally apply segmentation mask for occlusion
 
-Author: Virtual Try-On Team
+Authors: Pablo Tuñón Laguna, Lydia Ruiz Martínez
 Date: 2025-01-19
 """
 

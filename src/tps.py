@@ -40,7 +40,7 @@ References
 Bookstein, F. L. (1989). "Principal Warps: Thin-Plate Splines and the
 Decomposition of Deformations." IEEE PAMI, 11(6), 567-585.
 
-Author: Virtual Try-On Team
+Authors: Pablo Tuñón Laguna, Lydia Ruiz Martínez
 Date: 2025-01-19
 """
 

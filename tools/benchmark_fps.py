@@ -12,7 +12,7 @@ Usage:
     python tools/benchmark_fps.py --duration 30
     python tools/benchmark_fps.py --video test_video.mp4
 
-Author: Virtual Try-On Team
+Authors: Pablo Tuñón Laguna, Lydia Ruiz Martínez
 Date: 2025-01-19
 """
 

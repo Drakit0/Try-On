@@ -20,7 +20,7 @@ Usage:
     # Or use the wrapper
     python tools/run_line_profiler.py
 
-Author: Virtual Try-On Team
+Authors: Pablo Tuñón Laguna, Lydia Ruiz Martínez
 Date: 2025-01-19
 """
 

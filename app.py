@@ -13,7 +13,7 @@ Features:
 - Mirror mode and FPS counter
 - Capture and save frames
 
-Author: Virtual Try-On Team
+Authors: Pablo Tuñón Laguna, Lydia Ruiz Martínez
 Date: 2025-01-19
 """
 

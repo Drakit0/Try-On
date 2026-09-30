@@ -4,7 +4,7 @@ Utility Functions for Virtual Try-On
 
 Provides logging, performance tracking, and helper utilities.
 
-Author: Virtual Try-On Team
+Authors: Pablo Tuñón Laguna, Lydia Ruiz Martínez
 Date: 2025-01-19
 """
 
