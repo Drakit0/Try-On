@@ -662,7 +662,7 @@ def main():
     # Page configuration
     st.set_page_config(
         page_title="Virtual Try-On",
-        page_icon="👕",
+        page_icon=None,
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -675,7 +675,7 @@ def main():
     logger.info("=" * 80)
     
     # Title
-    st.title("👕 Virtual Try-On")
+    st.title("Virtual Try-On")
     st.markdown("Real-time garment visualization using AI pose detection")
     
     # Initialize session state
@@ -709,10 +709,10 @@ def main():
     # ========================================================================
     
     with st.sidebar:
-        st.header("⚙️ Settings")
+        st.header("Settings")
         
         # Garment selector
-        st.subheader("👔 Garment")
+        st.subheader("Garment")
         garment_names = [g['name'] for g in garments]
         selected_garment_name = st.selectbox(
             "Select Garment",
@@ -741,7 +741,7 @@ def main():
         st.divider()
         
         # Size adjustment
-        st.subheader("📏 Adjustments")
+        st.subheader("Adjustments")
         size = st.slider(
             "Size",
             min_value=0.8,
@@ -764,7 +764,7 @@ def main():
         st.divider()
         
         # Features
-        st.subheader("✨ Features")
+        st.subheader("Features")
         
         use_tps = st.checkbox(
             "TPS Warp",
@@ -804,12 +804,12 @@ def main():
         st.divider()
         
         # Capture section
-        st.subheader("📸 Capture")
+        st.subheader("Capture")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("📷 Capture", use_container_width=True):
+            if st.button("Capture", use_container_width=True):
                 if st.session_state.last_processed_frame is not None:
                     # Capture current frame
                     metadata = {
@@ -829,60 +829,60 @@ def main():
                     )
                     
                     if success:
-                        st.success(f"✅ Captured! ({capture_mgr.get_capture_count()} total)")
+                        st.success(f"[ok] Captured! ({capture_mgr.get_capture_count()} total)")
                     else:
-                        st.error(f"❌ Capture failed: {result}")
+                        st.error(f"[fail] Capture failed: {result}")
                 else:
-                    st.warning("⚠️ No frame available to capture")
+                    st.warning("[warn] No frame available to capture")
         
         with col2:
-            if st.button("🗑️ Delete All", use_container_width=True):
+            if st.button("Delete All", use_container_width=True):
                 deleted, errors = capture_mgr.delete_all_captures()
                 if deleted > 0:
-                    st.success(f"✅ Deleted {deleted} capture(s)")
+                    st.success(f"[ok] Deleted {deleted} capture(s)")
                 elif errors > 0:
-                    st.error(f"❌ Errors: {errors}")
+                    st.error(f"[fail] Errors: {errors}")
                 else:
-                    st.info("ℹ️ No captures to delete")
+                    st.info("No captures to delete")
         
         # Show capture stats
         num_captures = capture_mgr.get_capture_count()
         storage_size = format_file_size(capture_mgr.get_storage_size())
-        st.caption(f"📁 Captures: {num_captures} | Storage: {storage_size}")
+        st.caption(f"Captures: {num_captures} | Storage: {storage_size}")
         
         if num_captures > 0:
-            st.caption(f"📂 Location: {capture_mgr.capture_dir}")
+            st.caption(f"Location: {capture_mgr.capture_dir}")
         
         st.divider()
         
         # Privacy notice
-        st.subheader("🔒 Privacy & Security")
+        st.subheader("Privacy & Security")
         
         with st.expander("Privacy Information", expanded=False):
             st.markdown(
                 """
-                **✅ Local Processing Only**
+                **[ok] Local Processing Only**
                 
                 All AI processing happens on your device. No video frames, 
                 pose data, or biometric information is sent to external servers.
                 
-                **✅ No Persistent Storage**
+                **[ok] No Persistent Storage**
                 
                 Images are **not stored** unless you press the "Capture" button. 
                 Pose landmarks are computed per-frame and immediately discarded.
                 
-                **✅ User Control**
+                **[ok] User Control**
                 
                 - Captures saved to temporary directory on your machine
                 - Delete all captures anytime with "Delete All" button
                 - No cloud backup or external uploads
                 
-                **⚠️ HTTPS Required for Mobile**
+                **[warn] HTTPS Required for Mobile**
                 
                 Modern browsers require HTTPS to access camera on mobile devices.
                 Use ngrok, Caddy, or a reverse proxy for HTTPS access.
                 
-                **📍 Capture Location**
+                **Capture Location**
                 
                 Captures are stored in: `{}`
                 
@@ -892,11 +892,11 @@ def main():
             )
         
         st.info(
-            "🔒 **Local processing only** • Images not stored unless you press Capture"
+            "**Local processing only** • Images not stored unless you press Capture"
         )
         
         # Performance info
-        st.subheader("⚡ Performance")
+        st.subheader("Performance")
         st.caption(f"Target: {Config.TARGET_FPS} FPS @ {Config.VIDEO_WIDTH}×{Config.VIDEO_HEIGHT}")
         st.caption(f"Current: {state.current_fps:.1f} FPS")
     
@@ -904,7 +904,7 @@ def main():
     # Main Content - Video Stream
     # ========================================================================
     
-    st.header("📹 Live Preview")
+    st.header("Live Preview")
     
     # Prepare settings dict for callback
     settings = {
@@ -943,7 +943,7 @@ def main():
     )
     
     # Instructions
-    with st.expander("ℹ️ How to Use", expanded=False):
+    with st.expander("How to Use", expanded=False):
         st.markdown("""
         ### Getting Started
         
@@ -983,7 +983,7 @@ def main():
         """)
     
     # Technical details
-    with st.expander("🔧 Technical Details", expanded=False):
+    with st.expander("Technical Details", expanded=False):
         st.markdown(f"""
         ### Pipeline
         

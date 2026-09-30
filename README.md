@@ -1,6 +1,6 @@
 # Try-On
 
-Webcam virtual dress try-on built as a side demo for Lady Pipa during the EY-Parthenon Race to Parthenon 2025. It is a Streamlit app that finds the body in the video, warps a dress image to the pose and draws it over the person in real time.
+Webcam virtual dress try-on demo for Lady Pipa dresses. It is a Streamlit app that finds the body in the video, warps a dress image to the pose and draws it over the person in real time.
 
 Authors: Pablo Tuñón Laguna and Lydia Ruiz Martínez.
 
@@ -19,7 +19,7 @@ The sidebar has the garment selector, size and vertical offset sliders, toggles 
 
 ## Run
 
-Python 3.9 or newer and a webcam.
+Python 3.8 or newer and a webcam.
 
 ```
 pip install -r requirements.txt
@@ -32,7 +32,7 @@ The app opens at http://localhost:8501. Press START in the video widget to turn 
 
 ## Garments
 
-`assets/garments/` has two dresses as JPG and as PNG with transparent background: Vestido Siracusa Burdeos and Vestido Nubia Marino. Both have six control points in `assets/garments.json`. `setup/download_dress.py` and `setup/remove_background.py` fetch the Siracusa photo and cut out the background (the second needs `rembg`). `setup_dresses.py` generates control points from the image size.
+`assets/garments.json` holds the control points for two dresses, Vestido Siracusa Burdeos and Vestido Nubia Marino (six points each). The dress photographs are not in this repository because they belong to Lady Pipa. Put a JPG and a PNG with transparent background named `vestido_siracusa_burdeos` and `vestido_nubia_marino` in `assets/garments/` to use these entries. `setup/download_dress.py` and `setup/remove_background.py` fetch the Siracusa photo from the shop site and cut out the background (the second needs `rembg`). `setup_dresses.py` generates control points from the image size.
 
 To add a garment, put a transparent PNG in `assets/garments/`, mark its control points with
 
@@ -50,4 +50,4 @@ add the entry to `assets/garments.json`, and check it with `python tools/validat
 
 ## Licence
 
-MIT, see `LICENSE`. The dress photographs belong to Lady Pipa and are not covered by it.
+MIT, see `LICENSE`. The dress photographs belong to Lady Pipa, are not distributed here and are not covered by it.

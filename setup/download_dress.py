@@ -13,7 +13,7 @@ OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 try:
     urllib.request.urlretrieve(DRESS_URL, OUTPUT_FILE)
-    print(f"✅ Downloaded to: {OUTPUT_FILE}")
+    print(f"[ok] Downloaded to: {OUTPUT_FILE}")
     print(f"   File size: {OUTPUT_FILE.stat().st_size / 1024:.1f} KB")
     print("\nNext steps:")
     print("1. Remove background from the image (use remove.bg or Photoshop)")
@@ -21,4 +21,4 @@ try:
     print("3. Use point picker tool to mark control points:")
     print("   streamlit run tools/point_picker.py")
 except Exception as e:
-    print(f"❌ Error downloading: {e}")
+    print(f"[fail] Error downloading: {e}")

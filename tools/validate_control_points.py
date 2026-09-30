@@ -33,10 +33,10 @@ def load_control_points(json_file: Path) -> Tuple[Dict, bool]:
             data = json.load(f)
         return data, True
     except json.JSONDecodeError as e:
-        print(f"  ❌ Invalid JSON: {e}")
+        print(f"  [fail] Invalid JSON: {e}")
         return {}, False
     except Exception as e:
-        print(f"  ❌ Error loading file: {e}")
+        print(f"  [fail] Error loading file: {e}")
         return {}, False
 
 
@@ -64,7 +64,7 @@ def validate_structure(data: Dict) -> bool:
     
     if errors:
         for error in errors:
-            print(f"  ❌ {error}")
+            print(f"  [fail] {error}")
         return False
     
     return True
@@ -176,7 +176,7 @@ def validate_metadata(metadata: Dict) -> Tuple[bool, List[str]]:
 
 def validate_file(json_file: Path) -> bool:
     """Validate a single control points file."""
-    print(f"\n📄 {json_file.name}")
+    print(f"\n{json_file.name}")
     
     # Load JSON
     data, loaded = load_control_points(json_file)
@@ -203,26 +203,26 @@ def validate_file(json_file: Path) -> bool:
     
     if point_issues:
         for issue in point_issues:
-            if "❌" not in issue and "⚠️" not in issue:
+            if "[fail] " not in issue and "[warn] " not in issue:
                 if any(word in issue.lower() for word in ["missing", "outside", "too few", "not numeric"]):
-                    print(f"  ❌ {issue}")
+                    print(f"  [fail] {issue}")
                 else:
-                    print(f"  ⚠️  {issue}")
+                    print(f"  [warn]  {issue}")
     
     if meta_issues:
         for issue in meta_issues:
             if "must be" in issue.lower():
-                print(f"  ❌ {issue}")
+                print(f"  [fail] {issue}")
             else:
-                print(f"  ⚠️  {issue}")
+                print(f"  [warn]  {issue}")
     
     # Summary
     if all_valid and not point_issues and not meta_issues:
-        print(f"  ✅ Valid ({len(points)} points)")
+        print(f"  [ok] Valid ({len(points)} points)")
     elif all_valid:
-        print(f"  ✅ Valid with warnings ({len(points)} points)")
+        print(f"  [ok] Valid with warnings ({len(points)} points)")
     else:
-        print(f"  ❌ Invalid")
+        print(f"  [fail] Invalid")
     
     return all_valid
 
@@ -235,7 +235,7 @@ def main():
     
     # Check if directory exists
     if not CONTROL_POINTS_DIR.exists():
-        print(f"\n❌ Directory not found: {CONTROL_POINTS_DIR}")
+        print(f"\n[fail] Directory not found: {CONTROL_POINTS_DIR}")
         print("   Run the point picker tool first to create control points.")
         return
     
@@ -243,7 +243,7 @@ def main():
     json_files = sorted(CONTROL_POINTS_DIR.glob("*_points.json"))
     
     if not json_files:
-        print(f"\n⚠️  No control point files found in {CONTROL_POINTS_DIR}")
+        print(f"\n[warn]  No control point files found in {CONTROL_POINTS_DIR}")
         print("   Use the point picker tool to create some.")
         return
     
@@ -261,9 +261,9 @@ def main():
     print("=" * 60)
     
     if valid_count == len(json_files):
-        print("\n✅ All control point files are valid!")
+        print("\n[ok] All control point files are valid!")
     else:
-        print(f"\n⚠️  {len(json_files) - valid_count} file(s) have errors or warnings")
+        print(f"\n[warn]  {len(json_files) - valid_count} file(s) have errors or warnings")
     
     # Check for corresponding images
     print("\n" + "=" * 60)
@@ -275,9 +275,9 @@ def main():
         image_path = GARMENTS_DIR / f"{image_name}.png"
         
         if image_path.exists():
-            print(f"✅ {image_name}.png - Found")
+            print(f"[ok] {image_name}.png - Found")
         else:
-            print(f"❌ {image_name}.png - Not found in {GARMENTS_DIR}")
+            print(f"[fail] {image_name}.png - Not found in {GARMENTS_DIR}")
 
 
 if __name__ == "__main__":

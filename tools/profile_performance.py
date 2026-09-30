@@ -167,14 +167,14 @@ def profile_pipeline(num_frames: int = 100):
     # Check acceptance criteria
     print("\nACCEPTANCE CRITERIA:")
     if avg_total < 150:
-        print(f"  ✅ Latency < 150ms: {avg_total:.2f} ms")
+        print(f"  [ok] Latency < 150ms: {avg_total:.2f} ms")
     else:
-        print(f"  ❌ Latency < 150ms: {avg_total:.2f} ms (FAILED)")
+        print(f"  [fail] Latency < 150ms: {avg_total:.2f} ms (FAILED)")
     
     if fps >= 20:
-        print(f"  ✅ FPS >= 20: {fps:.1f}")
+        print(f"  [ok] FPS >= 20: {fps:.1f}")
     else:
-        print(f"  ❌ FPS >= 20: {fps:.1f} (FAILED)")
+        print(f"  [fail] FPS >= 20: {fps:.1f} (FAILED)")
     
     return timings
 

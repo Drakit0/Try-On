@@ -597,11 +597,11 @@ if __name__ == '__main__':
     
     # Create TPS
     tps = ThinPlateSpline(src_pts)
-    print(f"\n✅ TPS initialized with {tps.n_pts} control points")
+    print(f"\n[ok] TPS initialized with {tps.n_pts} control points")
     
     # Fit to destination
     tps.fit(dst_pts)
-    print("✅ Fitted TPS transformation")
+    print("[ok] Fitted TPS transformation")
     
     # Test control point accuracy
     # Transform source points and compare to destination
@@ -628,9 +628,9 @@ if __name__ == '__main__':
     print(f"  Max:  {max_error:.3f}px")
     
     if mean_error < 1.5:
-        print("  ✅ Mean error < 1.5px (acceptable)")
+        print("  [ok] Mean error < 1.5px (acceptable)")
     else:
-        print("  ⚠️  Mean error >= 1.5px")
+        print("  [warn]  Mean error >= 1.5px")
     
     # Test 2: RGBA warping
     print("\n2. RGBA Channel Preservation")
@@ -665,9 +665,9 @@ if __name__ == '__main__':
     print(f"Channels preserved: R={has_r}, G={has_g}, B={has_b}, A={has_a}")
     
     if has_r and has_g and has_b and has_a:
-        print("✅ All RGBA channels preserved")
+        print("[ok] All RGBA channels preserved")
     else:
-        print("⚠️  Some channels missing")
+        print("[warn]  Some channels missing")
     
     # Test 3: Performance
     print("\n3. Performance Test")
@@ -698,10 +698,10 @@ if __name__ == '__main__':
     print(f"Estimated FPS: {1000/warp_time:.1f}")
     
     if warp_time < 33:  # 30 FPS
-        print("✅ Real-time performance (>30 FPS)")
+        print("[ok] Real-time performance (>30 FPS)")
     else:
-        print("⚠️  Below real-time (<30 FPS)")
+        print("[warn]  Below real-time (<30 FPS)")
     
     print("\n" + "=" * 70)
-    print("✅ TPS module demonstration complete")
+    print("[ok] TPS module demonstration complete")
     print("=" * 70)

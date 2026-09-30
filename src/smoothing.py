@@ -637,9 +637,9 @@ if __name__ == '__main__':
     print(f"Estimated lag: {lag:.1f}ms")
     
     if lag < 50:
-        print("✅ Latency < 50ms (acceptable)")
+        print("[ok] Latency < 50ms (acceptable)")
     else:
-        print("⚠️  Latency > 50ms (perceptible)")
+        print("[warn]  Latency > 50ms (perceptible)")
     
     print("\n2. EMA Filter Demo")
     print("-" * 70)
@@ -668,9 +668,9 @@ if __name__ == '__main__':
     print(f"Estimated lag: {lag_ema:.1f}ms")
     
     if lag_ema < 50:
-        print("✅ Latency < 50ms (acceptable)")
+        print("[ok] Latency < 50ms (acceptable)")
     else:
-        print("⚠️  Latency > 50ms (perceptible)")
+        print("[warn]  Latency > 50ms (perceptible)")
     
     print("\n3. Landmark Filtering Demo")
     print("-" * 70)
@@ -714,5 +714,5 @@ if __name__ == '__main__':
     print(f"\nNose variance reduction: {var_reduction:.1f}%")
     
     print("\n" + "=" * 70)
-    print("✅ Smoothing module demonstration complete")
+    print("[ok] Smoothing module demonstration complete")
     print("=" * 70)

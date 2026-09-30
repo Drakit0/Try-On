@@ -27,25 +27,25 @@ def validate_garments():
     json_path = Path("assets/garments.json")
     
     if not json_path.exists():
-        print(f"❌ ERROR: {json_path} not found")
+        print(f"[fail] ERROR: {json_path} not found")
         return False
     
     try:
         with open(json_path) as f:
             data = json.load(f)
     except json.JSONDecodeError as e:
-        print(f"❌ ERROR: Invalid JSON: {e}")
+        print(f"[fail] ERROR: Invalid JSON: {e}")
         return False
     
-    print(f"✅ JSON valid and loaded")
+    print(f"[ok] JSON valid and loaded")
     
     # Check structure
     if "garments" not in data:
-        print("❌ ERROR: Missing 'garments' key")
+        print("[fail] ERROR: Missing 'garments' key")
         return False
     
     garments = data["garments"]
-    print(f"✅ Found {len(garments)} garments\n")
+    print(f"[ok] Found {len(garments)} garments\n")
     
     # Validate each garment
     all_valid = True
@@ -59,10 +59,10 @@ def validate_garments():
         required_fields = ['id', 'name', 'path', 'type', 'metadata', 'tps_control_points']
         for field in required_fields:
             if field not in garment:
-                print(f"  ❌ Missing required field: {field}")
+                print(f"  [fail] Missing required field: {field}")
                 all_valid = False
             else:
-                print(f"  ✅ {field}: {garment[field] if field not in ['metadata', 'tps_control_points'] else '...'}")
+                print(f"  [ok] {field}: {garment[field] if field not in ['metadata', 'tps_control_points'] else '...'}")
         
         # Validate metadata
         if 'metadata' in garment:
@@ -72,35 +72,35 @@ def validate_garments():
             print("\n  Metadata:")
             for field in required_meta:
                 if field not in meta:
-                    print(f"    ❌ Missing: {field}")
+                    print(f"    [fail] Missing: {field}")
                     all_valid = False
                 else:
                     value = meta[field]
                     if not isinstance(value, (int, float)):
-                        print(f"    ❌ {field}: {value} (not a number)")
+                        print(f"    [fail] {field}: {value} (not a number)")
                         all_valid = False
                     elif value < 0 and field != 'y_offset_to_waist_px':
-                        print(f"    ❌ {field}: {value} (negative value)")
+                        print(f"    [fail] {field}: {value} (negative value)")
                         all_valid = False
                     else:
-                        print(f"    ✅ {field}: {value} px")
+                        print(f"    [ok] {field}: {value} px")
         
         # Validate control points
         if 'tps_control_points' in garment:
             tps = garment['tps_control_points']
             
             if 'src' not in tps:
-                print("\n  ❌ Missing 'src' in tps_control_points")
+                print("\n  [fail] Missing 'src' in tps_control_points")
                 all_valid = False
             else:
                 src_points = tps['src']
                 print(f"\n  Control Points: {len(src_points)} points")
                 
                 if len(src_points) < 6:
-                    print(f"    ❌ Only {len(src_points)} points (need at least 6)")
+                    print(f"    [fail] Only {len(src_points)} points (need at least 6)")
                     all_valid = False
                 else:
-                    print(f"    ✅ {len(src_points)} points (>= 6 required)")
+                    print(f"    [ok] {len(src_points)} points (>= 6 required)")
                 
                 # Check each point
                 required_point_names = [
@@ -113,36 +113,36 @@ def validate_garments():
                 
                 for name in required_point_names:
                     if name in point_names:
-                        print(f"    ✅ {name}")
+                        print(f"    [ok] {name}")
                     else:
-                        print(f"    ⚠️  Missing recommended point: {name}")
+                        print(f"    [warn]  Missing recommended point: {name}")
                 
                 # Validate point structure
                 for pt in src_points:
                     if 'name' not in pt or 'x' not in pt or 'y' not in pt:
-                        print(f"    ❌ Invalid point structure: {pt}")
+                        print(f"    [fail] Invalid point structure: {pt}")
                         all_valid = False
                     elif not isinstance(pt['x'], (int, float)) or not isinstance(pt['y'], (int, float)):
-                        print(f"    ❌ Non-numeric coordinates in {pt['name']}")
+                        print(f"    [fail] Non-numeric coordinates in {pt['name']}")
                         all_valid = False
         
         # Check file exists
         if 'path' in garment:
             garment_path = Path("assets") / garment['path']
             if garment_path.exists():
-                print(f"\n  ✅ File exists: {garment_path}")
+                print(f"\n  [ok] File exists: {garment_path}")
             else:
-                print(f"\n  ⚠️  File not found: {garment_path}")
+                print(f"\n  [warn]  File not found: {garment_path}")
                 print(f"      (This is OK for demo - app will handle gracefully)")
     
     print("\n" + "=" * 70)
     
     if all_valid:
-        print("✅ ALL VALIDATIONS PASSED")
+        print("[ok] ALL VALIDATIONS PASSED")
         print("=" * 70)
         return True
     else:
-        print("❌ SOME VALIDATIONS FAILED")
+        print("[fail] SOME VALIDATIONS FAILED")
         print("=" * 70)
         return False
 
@@ -175,30 +175,30 @@ def test_tps_compatibility():
                 try:
                     # Create TPS
                     tps = ThinPlateSpline(src_pts)
-                    print(f"  ✅ TPS initialized with {len(src_pts)} points")
+                    print(f"  [ok] TPS initialized with {len(src_pts)} points")
                     
                     # Create dummy destination points (slight shift)
                     dst_pts = src_pts + np.random.randn(len(src_pts), 2) * 5
                     
                     # Fit
                     tps.fit(dst_pts)
-                    print(f"  ✅ TPS fit successful")
+                    print(f"  [ok] TPS fit successful")
                     
                     # Generate grid
                     map_x, map_y = tps.sample_grid(256, 256)
-                    print(f"  ✅ Grid generation successful: {map_x.shape}")
+                    print(f"  [ok] Grid generation successful: {map_x.shape}")
                     
                 except Exception as e:
-                    print(f"  ❌ TPS error: {e}")
+                    print(f"  [fail] TPS error: {e}")
                     return False
         
         print("\n" + "=" * 70)
-        print("✅ TPS COMPATIBILITY VERIFIED")
+        print("[ok] TPS COMPATIBILITY VERIFIED")
         print("=" * 70)
         return True
         
     except ImportError:
-        print("\n⚠️  Cannot import TPS module (this is OK if not installed)")
+        print("\n[warn]  Cannot import TPS module (this is OK if not installed)")
         return True
 
 
@@ -207,8 +207,8 @@ if __name__ == '__main__':
     tps_ok = test_tps_compatibility()
     
     if valid and tps_ok:
-        print("\n✅ All validations passed! garments.json is ready to use.")
+        print("\n[ok] All validations passed! garments.json is ready to use.")
         sys.exit(0)
     else:
-        print("\n❌ Validation failed. Please fix errors above.")
+        print("\n[fail] Validation failed. Please fix errors above.")
         sys.exit(1)

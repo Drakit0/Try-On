@@ -233,9 +233,9 @@ class FPSBenchmark:
             
             # Check acceptance
             if results['avg_fps'] >= 20:
-                print(f"  Status:      ✅ PASS (>= 20 FPS)")
+                print(f"  Status:      [ok] PASS (>= 20 FPS)")
             else:
-                print(f"  Status:      ❌ FAIL (< 20 FPS)")
+                print(f"  Status:      [fail] FAIL (< 20 FPS)")
         
         print("\n" + "="*70)
 

@@ -615,9 +615,9 @@ if __name__ == '__main__':
     print(f"  Computed scale_x: {transform['scale_x']:.3f}")
     
     if abs(transform['scale_x'] - expected_scale_x) < 0.001:
-        print("  ✅ Scale calculation correct")
+        print("  [ok] Scale calculation correct")
     else:
-        print("  ⚠️  Scale mismatch")
+        print("  [warn]  Scale mismatch")
     
     # Test 2: Alpha composition
     print("\n2. Alpha Composition")
@@ -649,9 +649,9 @@ if __name__ == '__main__':
     print(f"Color at edge (should be bg): {edge_color}")
     
     if center_color[1] > center_color[0]:  # More green than blue
-        print("✅ Alpha composition working")
+        print("[ok] Alpha composition working")
     else:
-        print("⚠️  Alpha composition issue")
+        print("[warn]  Alpha composition issue")
     
     # Test 3: BGR/RGBA conversion
     print("\n3. Color Space Conversion")
@@ -665,19 +665,19 @@ if __name__ == '__main__':
     
     # Should be red in RGB (with alpha)
     if test_rgba[0, 0, 0] == 255 and test_rgba[0, 0, 3] == 200:
-        print("✅ BGR to RGBA conversion correct")
+        print("[ok] BGR to RGBA conversion correct")
     else:
-        print("⚠️  Conversion issue")
+        print("[warn]  Conversion issue")
     
     # Convert back
     back_bgr = rgba_to_bgr(test_rgba)
     print(f"Back to BGR: {back_bgr[0, 0]}")
     
     if np.array_equal(test_bgr, back_bgr):
-        print("✅ Round-trip conversion successful")
+        print("[ok] Round-trip conversion successful")
     else:
-        print("⚠️  Round-trip mismatch")
+        print("[warn]  Round-trip mismatch")
     
     print("\n" + "=" * 70)
-    print("✅ Overlay module demonstration complete")
+    print("[ok] Overlay module demonstration complete")
     print("=" * 70)

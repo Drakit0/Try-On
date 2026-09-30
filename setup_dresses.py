@@ -107,7 +107,7 @@ garments_data = {
 with open("assets/garments.json", "w") as f:
     json.dump(garments_data, f, indent=2)
 
-print("\n✓ Updated assets/garments.json with both dresses")
+print("\n[ok] Updated assets/garments.json with both dresses")
 print("\nGarments configured:")
 print("  1. Vestido Siracusa Burdeos")
 print("  2. Vestido Nubia Marino")

@@ -317,14 +317,14 @@ class PrivacyAuditor:
             Privacy statement text
         """
         return """
-        🔒 **Privacy & Security**
+        **Privacy & Security**
         
-        - ✅ **100% Local Processing**: All AI processing happens on your device
-        - ✅ **No Data Upload**: Frames and biometrics never leave your machine
-        - ✅ **No Persistent Storage**: Images stored only when you press "Capture"
-        - ✅ **User Control**: Delete all captures anytime via "Delete All" button
-        - ✅ **Temporary Storage**: Captures saved in system temp directory
-        - ✅ **No Tracking**: No analytics, cookies, or external services
+        - [ok] **100% Local Processing**: All AI processing happens on your device
+        - [ok] **No Data Upload**: Frames and biometrics never leave your machine
+        - [ok] **No Persistent Storage**: Images stored only when you press "Capture"
+        - [ok] **User Control**: Delete all captures anytime via "Delete All" button
+        - [ok] **Temporary Storage**: Captures saved in system temp directory
+        - [ok] **No Tracking**: No analytics, cookies, or external services
         
         **HTTPS Note**: Camera access requires HTTPS on mobile devices.
         """

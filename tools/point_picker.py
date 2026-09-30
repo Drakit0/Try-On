@@ -151,17 +151,17 @@ def redo():
 def main():
     st.set_page_config(
         page_title="Garment Control Point Picker",
-        page_icon="📍",
+        page_icon="",
         layout="wide"
     )
     
     init_session_state()
     
-    st.title("📍 Garment Control Point Picker")
+    st.title("Garment Control Point Picker")
     st.markdown("*Interactive tool to mark control points on garment images for TPS warping*")
     
     # Sidebar controls
-    st.sidebar.header("⚙️ Settings")
+    st.sidebar.header("Settings")
     
     # Image selection
     image_files = get_image_files()
@@ -183,7 +183,7 @@ def main():
     # Load/New buttons
     col1, col2 = st.sidebar.columns(2)
     
-    if col1.button("📂 Load Points"):
+    if col1.button("Load Points"):
         loaded_points, loaded_metadata = load_points_json(selected_name)
         if loaded_points:
             st.session_state.points = loaded_points
@@ -193,7 +193,7 @@ def main():
         else:
             st.sidebar.warning("No saved points found")
     
-    if col2.button("🆕 New"):
+    if col2.button("New"):
         st.session_state.points = []
         st.session_state.current_point_index = 0
         st.session_state.history = []
@@ -246,7 +246,7 @@ def main():
         current_point_name = point_names[len(st.session_state.points)]
         st.sidebar.success(f"**Next point:** {current_point_name}")
     else:
-        st.sidebar.success("✅ All points marked!")
+        st.sidebar.success("[ok] All points marked!")
     
     # Undo/Redo
     st.sidebar.subheader("History")
@@ -319,7 +319,7 @@ def main():
                         st.rerun()
             
             # Instructions
-            st.info("👆 **Click on the image** to add control points in order. Points will be added according to the list on the right.")
+            st.info("**Click on the image** to add control points in order. Points will be added according to the list on the right.")
             
         except Exception as e:
             st.error(f"Error loading image: {e}")
@@ -338,7 +338,7 @@ def main():
                 col2.markdown(f"`({point['x']}, {point['y']})`")
                 
                 # Delete button
-                if st.button("🗑️", key=f"delete_{i}"):
+                if st.button("", key=f"delete_{i}"):
                     st.session_state.points.pop(i)
                     add_to_history()
                     st.rerun()
@@ -346,7 +346,7 @@ def main():
             st.markdown("---")
             
             # Edit point coordinates
-            with st.expander("✏️ Edit Coordinates"):
+            with st.expander("Edit Coordinates"):
                 edit_idx = st.selectbox(
                     "Select point to edit",
                     range(len(st.session_state.points)),
@@ -372,34 +372,34 @@ def main():
         st.markdown("---")
         
         # Clear all button
-        if st.button("🗑️ Clear All Points", type="secondary"):
+        if st.button("Clear All Points", type="secondary"):
             st.session_state.points = []
             add_to_history()
             st.rerun()
         
         # Save button
-        if st.button("💾 Save Points", type="primary", disabled=len(st.session_state.points) == 0):
+        if st.button("Save Points", type="primary", disabled=len(st.session_state.points) == 0):
             output_file = save_points_json(selected_name, st.session_state.points, st.session_state.metadata)
-            st.success(f"✅ Saved to:\n`{output_file}`")
+            st.success(f"[ok] Saved to:\n`{output_file}`")
         
         # Export section
         if st.session_state.points:
             st.markdown("---")
-            st.subheader("📋 Export")
+            st.subheader("Export")
             
             export_format = export_to_garments_format(st.session_state.points, st.session_state.metadata)
             
             st.code(export_format, language="json")
             
             st.download_button(
-                label="📥 Download JSON",
+                label="Download JSON",
                 data=export_format,
                 file_name=f"{selected_name}_control_points.json",
                 mime="application/json"
             )
             
             # Copy to clipboard helper
-            st.caption("💡 Copy this JSON and paste into `assets/garments.json`")
+            st.caption("Copy this JSON and paste into `assets/garments.json`")
     
     # Footer with stats
     st.markdown("---")
